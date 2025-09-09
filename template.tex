@@ -1,0 +1,304 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+
+% TODO: Add custom LaTeX header directives here
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={GeoLSTM},
+  pdfauthor={Gerard Franco-Panadés; Eliza Dealloc},
+  pdfkeywords={Spatio-temporal traffic prediction, Road geometry
+integration, Heavy-weight vehicle intensity, Neural networks, Long
+Short-Term Memory (LSTM), Mid-term traffic prediction},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{GeoLSTM}
+\author{Gerard Franco-Panadés \and Eliza Dealloc}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+Accurate prediction of dynamic states in complex physical systems is
+critical for intelligent decision-support and control. This paper
+presents a novel spatio-temporal deep learning framework tailored to
+expert systems operating in mobility and transportation environments.
+Using a large-scale, multi-source dataset collected over two years from
+a 100-kilometer highway segment, the proposed model integrates static
+road geometry features---specifically curvature and slope---into a Long
+Short-Term Memory (LSTM) architecture. We introduce GeoLSTM, a
+geometry-aware neural network model that enhances mid-term traffic
+forecasting accuracy across multiple metrics, including vehicle speed,
+total intensity and heavy-weight vehicle intensity, addressing the
+common omission of static road geometry by embedding curvature and
+slope. Our experiments demonstrate that incorporating static spatial
+features significantly reduces prediction error (up to 26\% for speed
+and 16\% for heavy-vehicle intensity) and improves model stability,
+outperforming both traditional baselines and transformer-based
+alternatives. We further quantify computational costs to assess
+real-time deployment feasibility. These results establish a robust
+methodology for integrating contextual spatial data into deep
+learning-based expert systems, with potential generalization across
+other domains requiring predictive modelling in structured, data-rich
+environments.
+\end{abstract}
+
+\renewcommand*\contentsname{Table of contents}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+
+\subsection{Introduction}\label{sec-intro}
+
+\emph{TODO} In recent years, traffic management systems are increasingly
+depending on precise real-time traffic forecasting (Pan et al., 2024) to
+improve response effectiveness and resource allocation when exceptional
+situations like accidents or congestion happen. For these systems to
+effectively handle regular traffic patterns, predictive accuracy is
+crucial. Furthermore, the surge of new technologies related to smart
+cities infrastructure, autonomous vehicles (AVs) or mobility services
+also benefit from new data sources for accurate traffic state
+predictions. Nowadays dynamic inputs from high-resolution traffic
+sensors and GPS data allow for more responsive and adaptable road
+network control in a variety of situations (Seo et al., 2017). However,
+most operational forecasting systems still neglect the static physical
+constraints of the road network, such as curvature and slope, which can
+systematically influence vehicle behaviour, lane capacity, and
+congestion onset. This motivates our integration of road geometry into
+deep learning architectures, aiming to improve both accuracy and
+stability in real-time traffic prediction. The data used in this study
+comes from the AP-7 highway in Catalonia, a high-traffic corridor that
+serves as a representative example for evaluating the proposed approach.
+The methodology, combining static geometry with dynamic traffic
+features, is designed to be applicable to other highway networks with
+similar data availability, enabling broader deployment and
+generalization. Covering a 100-kilometer segment, the highway has
+infrastructure sensors (inductive loop detectors) providing detailed
+traffic intensity data (including heavy vehicles) and GPS-derived speed
+statistics at a granularity of 1-minute intervals. This extensive
+two-year dataset was aggregated to hourly intervals, facilitating
+precise and operationally meaningful mid-term traffic forecasts. This
+particular segment was selected due to its high frequency of
+congestion-related incidents, which significantly impact regional
+mobility and safety (Guasch, 2024). The scope of this article is
+interurban roads (highways), with urban environments outside the present
+scope because they must be treated differently (Zhu et al., 2023). The
+core contribution of this research lies in the applied integration of
+static road geometry features---specifically curvature and slope---into
+established deep learning architectures for traffic forecasting. Rather
+than introducing new architecture types, this work focuses on model
+improvements for real-world deployment in structured highway
+environments, substantially improving predictive accuracy. ``Existing
+deep learning approaches often lack spatial awareness beyond immediate
+sensor locations, and even spatial models rarely incorporate static
+environmental features .This results in forecasts that may perform well
+under stable conditions but degrade when geometric constraints alter
+driver behaviour. Our work directly addresses this shortcoming (Wang et
+al., 2024). Incorporating additional contextual variables, such as
+vehicle weight classifications and a mobility calendar indicating
+holidays and special events, further enhances the system's performance.
+Given the primary objectives of the Catalan Traffic
+Authority---improving road safety and reducing mortality rates---the
+accuracy gains offered by this enhanced forecasting approach directly
+translate into practical operational improvements. By developing
+real-time traffic forecasting systems, traffic authorities can
+proactively implement targeted interventions to mitigate potential
+hazards or congestion, thus significantly enhancing regional traffic
+safety and operational efficiency. This practical application
+underscores the broader relevance of this research in developing
+intelligent, data-driven decision-support systems capable of improving
+transportation efficiency, safety, and reliability. By combining
+detailed road geometry data with dynamic traffic compositions, the
+proposed model accurately captures complex traffic patterns across
+diverse road conditions, setting a new benchmark for predictive accuracy
+and operational utility in intelligent transportation systems (Seo et
+al., 2017).
+
+The main contributions of this work are as follows: • We propose
+GeoLSTM, a geometry-aware LSTM model that integrates static road
+features (curvature, slope) alongside dynamic traffic variables for
+spatio-temporal mid-term highway traffic forecasting. • Demonstration
+that the proposed GeoLSTM improves traffic predictions accuracy by up to
+26\% compared to geometry-agnostic models. • Performance comparison
+showing that GeoLSTM outperforms advanced baselines, including
+Transformer-based architectures for highway traffic hourly data
+providing mid-term predictions. • Validation of the model on a
+large-scale, real-world dataset collected over two years on a 100-km
+highway, demonstrating significant error reductions across multiple
+traffic indicators. • Evidence of enhanced spatial robustness across
+diverse highway segments. • Reproducible methodology using open-access
+road geometry data, enabling adaptation to other highway networks with
+similar data availability. The remainder of this article is structured
+as follows. Section 2 provides a comprehensive review of prior work in
+traffic forecasting, spanning from traditional statistical models to
+advanced deep learning architectures. Section 3 details the dataset and
+formalizes the forecasting problem, including the spatial and temporal
+structure of the traffic data and the inclusion of static geometric
+features. Section 4 describes the methodological framework, outlining
+the neural architectures considered, the integration of road geometry,
+and the training and optimization protocols. Section 5 presents the
+experimental results, including comparative performance analyses,
+feature importance assessments, and computational efficiency
+evaluations. Finally, Section 6 discusses the broader implications of
+the findings, acknowledges limitations, and proposes directions for
+future research.
+
+
+
+
+\end{document}
